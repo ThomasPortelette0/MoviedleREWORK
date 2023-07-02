@@ -14,10 +14,14 @@ function random_film_image(json_file)
         return random_film.displayName;
   
     })
-    .then(guess_mode)
-    .then(isCorrect => {
+    .then(async guess => {
+        const isCorrect = await guess_mode(guess);
         if (isCorrect)
-        random_film_image('films.json')})
+        {
+            random_film_image(json_file);
+        }
+    })
+
     .catch(err => {
         console.log(err);
     });
