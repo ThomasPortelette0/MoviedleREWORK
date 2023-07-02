@@ -17,7 +17,7 @@ function random_film_image(json_file)
     .then(guess_mode)
     .then(isCorrect => {
         if (isCorrect)
-        random_film_image('films.json')})
+        random_film_image('../films.json')})
     .catch(err => {
         console.log(err);
     });
