@@ -40,8 +40,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     var start = await random_film_image('films.json');
     const guess_button = document.getElementsByTagName('button')[0];
     guess_button.addEventListener('click', async () => {
-        console.log(start);
-        console.log(guess_mode(start));
         if(guess_mode(start))
         {
             start = await random_film_image('films.json');
