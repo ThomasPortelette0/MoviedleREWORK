@@ -6,4 +6,30 @@
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 5px;
+}
+
+body
+{
+    background: #474646;
+}
+
+img
+{
+    display:flex;
+    margin:auto;
+    width: 17.5%;
+}
+
+input 
+{
+    text-align: center;
+    width: 20%;
+    padding: 8px 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
 }
