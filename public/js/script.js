@@ -1,60 +1,50 @@
-function random_film_image(json_file)
+async function random_film_image(json_file)
 {
-    const image = document.getElementsByTagName('img')[0];
+    try
+    {
+        const response = await fetch(json_file);
+        const data = await response.json();
 
-    fetch(json_file)
-    .then(response => {
-        return response.json();
-    })
-    .then(data => { 
         const keys = Object.keys(data);
         const random_key = keys[Math.floor(Math.random() * keys.length)];
         const random_film = data[random_key];
-        image.src = random_film.imageUrl;
-        return random_film.displayName;
-  
-    })
-    .then(async guess => {
-        const isCorrect = await guess_mode(guess);
-        if (isCorrect)
-        {
-            random_film_image(json_file);
-        }
-    })
 
-    .catch(err => {
+        const image = document.getElementsByTagName('img')[0];
+        image.src = random_film.imageUrl;
+
+        return random_film.displayName;
+       
+    }
+    catch(err)
+    {
         console.log(err);
-    });
+    }
 
 }
 
 
 function guess_mode(guess)
 {
-    return new Promise((resolve, reject) => {
-    guess_input = document.getElementsByTagName('input')[0];
-    const guess_button = document.getElementsByTagName('button')[0];
+   guess_input = document.getElementsByTagName('input')[0];
 
-    console.log(guess);
-    console.log(guess_input.value);
-  
-    guess_button.addEventListener('click', () => {
-        if (guess_input.value === guess)
-        {
-            resolve(true);
-
-        }
-        else
-        {
-           resolve(false);
-        }
-    });
-
-    });
-
+   if(guess_input.value === guess)
+   {
+       return true;
+   }
+   return false;
 
 }
 
 
-document.addEventListener('DOMContentLoaded', () => 
-    random_film_image('films.json'));
+document.addEventListener('DOMContentLoaded', async () => {
+    var start = await random_film_image('films.json');
+    const guess_button = document.getElementsByTagName('button')[0];
+    guess_button.addEventListener('click', async () => {
+        console.log(start);
+        console.log(guess_mode(start));
+        if(guess_mode(start))
+        {
+            start = await random_film_image('films.json');
+        }
+    });
+});
