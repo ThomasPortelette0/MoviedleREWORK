@@ -53,4 +53,4 @@ function guess_mode(guess)
 
 
 document.addEventListener('DOMContentLoaded', () => 
-    random_film_image('films.json'));
+    random_film_image('../films.json'));
