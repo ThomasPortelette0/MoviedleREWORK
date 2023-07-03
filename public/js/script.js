@@ -1,3 +1,6 @@
+let pixelation = 20; // Niveau initial de pixelisation.
+let imgObj = null; // Variable pour stocker l'objet Image.
+
 async function random_film_image(json_file)
 {
     try
@@ -5,23 +8,54 @@ async function random_film_image(json_file)
         const response = await fetch(json_file);
         const data = await response.json();
 
-
         const keys = Object.keys(data);
         const random_key = keys[Math.floor(Math.random() * keys.length)];
         const random_film = data[random_key];
 
-        const image = document.getElementsByTagName('img')[0];
-        image.src = random_film.imageUrl;
+        imgObj = new Image();
+        imgObj.src = random_film.imageUrl;
+        imgObj.onload = function () {
+            const canvas = document.getElementById('photo');
+            const context = canvas.getContext('2d');
+
+            canvas.width = 500;
+            canvas.height = 750;
+
+            context.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
+            pixelate();
+        };
 
         return random_film.displayName;
-       
     }
     catch(err)
     {
         console.log(err);
     }
-
 }
+
+
+
+
+function pixelate() {
+    const canvas = document.getElementById('photo');
+    const context = canvas.getContext('2d');
+    const size = 1 / pixelation;
+    const w = canvas.width * size;
+    const h = canvas.height * size;
+
+    // Dessine l'image originale à une fraction de la taille finale.
+    context.drawImage(canvas, 0, 0, w, h);
+
+    // Désactive le lissage de l'image.
+    context.msImageSmoothingEnabled = false;
+    context.mozImageSmoothingEnabled = false;
+    context.webkitImageSmoothingEnabled = false;
+    context.imageSmoothingEnabled = false;
+
+    // Agrandit l'image minimisée à la taille complète.
+    context.drawImage(canvas, 0, 0, w, h, 0, 0, canvas.width, canvas.height);
+}
+
 
 async function fetchFilms()
 {
@@ -100,13 +134,25 @@ function autocomplete()
 
 document.addEventListener('DOMContentLoaded', async () => {
     var start = await random_film_image('films.json');
-    const guess_button = document.getElementsByTagName('button')[0];
+    const guess_button = document.getElementById('button');
     guess_button.addEventListener('click', async () => {
         if(guess_mode(start))
         {
             start = await random_film_image('films.json');
         }
     });
-    autocomplete();
 
+const depixelate_button = document.getElementById('depixelate');
+depixelate_button.addEventListener('click', function() {
+    if(pixelation > 1) {
+        pixelation -= 5;
+        const canvas = document.getElementById('photo');
+        const context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
+        pixelate();
+    }
+});
+
+autocomplete();
 });
