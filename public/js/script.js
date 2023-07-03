@@ -14,7 +14,8 @@ async function random_film_image(json_file)
 
         imgObj = new Image();
         imgObj.src = random_film.imageUrl;
-        imgObj.onload = function () {
+        imgObj.onload = function () 
+        {
             const canvas = document.getElementById('photo');
             const context = canvas.getContext('2d');
 
@@ -36,7 +37,8 @@ async function random_film_image(json_file)
 
 
 
-function pixelate() {
+function pixelate() 
+{
     const canvas = document.getElementById('photo');
     const context = canvas.getContext('2d');
     const size = 1 / pixelation;
@@ -85,6 +87,7 @@ function guess_mode(guess)
 
    if(guess_input.value === guess)
    {
+        pixelation = 20;
         guess_input.value = "";
        return true;
    }
@@ -132,10 +135,12 @@ function autocomplete()
 
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => 
+{
     var start = await random_film_image('films.json');
     const guess_button = document.getElementById('button');
-    guess_button.addEventListener('click', async () => {
+    guess_button.addEventListener('click', async () => 
+    {
         if(guess_mode(start))
         {
             start = await random_film_image('films.json');
@@ -143,16 +148,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
 const depixelate_button = document.getElementById('depixelate');
-depixelate_button.addEventListener('click', function() {
-    if(pixelation > 1) {
+depixelate_button.addEventListener('click', function() 
+{
+    if(pixelation > 1)
+    {
         pixelation -= 5;
         const canvas = document.getElementById('photo');
         const context = canvas.getContext('2d');
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
         pixelate();
-    }
-});
+    }});
 
-autocomplete();
+    autocomplete();
 });
