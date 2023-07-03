@@ -117,7 +117,7 @@ button{
     cursor: pointer;
 }
 
-#button:hover, #{
+#button:hover, #depixelate:hover{
     background-color: #000000;
 }
 
