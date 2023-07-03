@@ -96,21 +96,24 @@ function guess_mode(guess)
 {
    guess_input = document.getElementsByTagName('input')[0];
 
-   if(guess_input.value === guess)
-   {
-        pixelation = 20;
-        guess_input.value = "";
-       return true;
-   }
-   else
-   {
-        pixelation -= 5;
-        const canvas = document.getElementById('photo');
-        const context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
-        pixelate();
-   }
+   if(guess_input.value != ""){
+        if(guess_input.value === guess)
+        {
+            pixelation = 20;
+            guess_input.value = "";
+            skipButton.style.display = 'none'; // Cache le bouton pour skip de film
+            return true;
+        }
+        else
+        {
+            pixelation -= 5;
+            const canvas = document.getElementById('photo');
+            const context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
+            pixelate();
+        }
+    }
    guess_input.value = "";
    return false;
 

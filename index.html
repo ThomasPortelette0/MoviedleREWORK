@@ -22,6 +22,9 @@
     <ul id="infobulle"></ul>
     <button id="button">Valider</button>
     <button id="depixelate">Dépixeliser</button>
+    <div id="buttonContainer">
+        
+    </div>
 
     <script>
         var inputText = document.getElementById("guessinput");
@@ -30,9 +33,33 @@
             if (event.keyCode === 13) {
                 event.preventDefault();
                 document.getElementById("button").click();
-
             }
         });
+
+        let clickCount = 0;
+
+        let depixeliseButton = document.getElementById('depixelate'); 
+
+        let skipButton = document.createElement('button');
+        skipButton.textContent = 'Skip';
+        skipButton.style.display = 'none';
+        skipButton.style.marginTop = '1vh';
+        skipButton.style.width = '10vw';
+        buttonContainer.appendChild(skipButton);
+
+        depixeliseButton.addEventListener('click', function() {
+            clickCount++;
+
+            if (clickCount >= 4) {
+                skipButton.style.display = 'block';
+                clickCount = 0;
+            }
+        });
+
+        skipButton.addEventListener('click', function() {
+            location.reload();
+        });
+
     </script>
 
 </body>
