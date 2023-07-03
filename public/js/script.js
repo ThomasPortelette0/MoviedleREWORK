@@ -19,10 +19,7 @@ async function random_film_image(json_file)
             const canvas = document.getElementById('photo');
             const context = canvas.getContext('2d');
 
-            canvas.width = 500;
-            canvas.height = 750;
-
-            context.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
+            context.drawImage(imgObj, 0, 0);
             pixelate();
         };
 

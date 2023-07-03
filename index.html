@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,32 @@
     <link rel="stylesheet" href="./public/css/style.css">
     <script src="./public/js/script.js"></script>
 </head>
+
 <body>
-    <h1 class="maintitle">MOVIEDLE</h1>
+    <nav>
+        <div class="title">
+            <h1 class="maintitle">Moviedle</h1>
+            <img src="./public/img/john-wick.png" alt="John Wick">
+        </div>
+    </nav>
+
     <canvas id="photo"></canvas>
     <input type="text" id="guessinput" placeholder="Type the film's name">
     <ul id="infobulle"></ul>
     <button id="button">Valider</button>
-    <button id="depixelate">SKIP</button>
+    <button id="depixelate">Dépixeliser</button>
+
+    <script>
+        var inputText = document.getElementById("guessInput");
+
+        inputText.addEventListener("keydown", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                validerFrontiere();
+            }
+        });
+    </script>
+
 </body>
+
 </html>
