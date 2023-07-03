@@ -132,10 +132,11 @@ button{
 }
 
 canvas {
-    width: 50%;
+    width: 20%;
     background-size: cover;
     background-repeat: no-repeat;
     margin-top: 2vh;
+
 }
 
 #button , #depixelate {
