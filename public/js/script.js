@@ -108,4 +108,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
     autocomplete();
+
 });
