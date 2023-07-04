@@ -165,3 +165,29 @@ canvas {
         width: 60%;
     }
 }
+
+
+@keyframes youWon 
+{
+    0%
+    {
+        transform: scale(1);
+    }
+
+    50%
+    {
+        transform: scale(1.3) rotate(2deg);
+    }
+
+    100%
+    {
+        transform: scale(1) rotate(0deg);
+    
+    }
+
+}
+
+.success
+{
+    animation: youWon 2s infinite;
+}

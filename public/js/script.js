@@ -102,6 +102,12 @@ function guess_mode(guess)
             pixelation = 20;
             guess_input.value = "";
             skipButton.style.display = 'none'; // Cache le bouton pour skip de film
+            const canvas = document.getElementById('photo');
+            const context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
+            canvas.classList.add('success');
+
             return true;
         }
         else
@@ -119,6 +125,8 @@ function guess_mode(guess)
 
 }
 
+
+
 function autocomplete()
 {
     const input = document.getElementById("guessinput");
@@ -133,7 +141,7 @@ function autocomplete()
             return;
         }
         
-        const matches = FILMS_ARRAY.filter(film => film.toLowerCase().includes(value.toLowerCase()));
+        const matches = FILMS_ARRAY.filter(film => film.toLowerCase().startsWith(value.toLowerCase()));
 
 
         if(matches.length===0)
@@ -158,6 +166,8 @@ function autocomplete()
 
 }
 
+
+
 document.addEventListener('DOMContentLoaded', async () => 
 {
     var start = await random_film_image('films.json');
@@ -166,7 +176,14 @@ document.addEventListener('DOMContentLoaded', async () =>
     {
         if(guess_mode(start))
         {
-            start = await random_film_image('films.json');
+            setTimeout(async () =>
+            {
+                start = await random_film_image('films.json');
+                const canvas = document.getElementById('photo');
+                canvas.classList.remove('success');
+            }, 400);
+          
+           
         }
     });
 
@@ -181,7 +198,8 @@ depixelate_button.addEventListener('click', function()
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
         pixelate();
-    }});
+    }
+});
 
     autocomplete();
 });
