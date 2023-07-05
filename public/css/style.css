@@ -168,6 +168,10 @@ canvas {
         width: 70%;
     }
 
+    #buttonContainer button{
+        width: 60% !important;
+    }
+
     #guessinput::placeholder {
         font-size: 15px;
     }
