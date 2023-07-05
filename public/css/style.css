@@ -144,6 +144,13 @@ canvas {
     padding: 10px;
 }
 
+#buttonContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 @media screen and (max-width:800px) {
     canvas {
         margin-top: 7.5vh;
@@ -155,6 +162,10 @@ canvas {
     #guessinput {
         width: 70%;
         margin-top: 1vh;
+    }
+
+    #infobulle{
+        width: 70%;
     }
 
     #guessinput::placeholder {
