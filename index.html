@@ -41,7 +41,7 @@
         let clickCount = 0;
 
         let depixeliseButton = document.getElementById('depixelate'); 
-
+        let validButton = document.getElementById('button');
         let skipButton = document.createElement('button');
         skipButton.textContent = 'Skip';
         skipButton.style.display = 'none';
@@ -49,13 +49,25 @@
         skipButton.style.width = '25%';
         buttonContainer.appendChild(skipButton);
 
-        depixeliseButton.addEventListener('click', function() {
+        validButton.addEventListener('click',function()
+        {
+            clickCount=0;
+        });
+
+        depixeliseButton.addEventListener('click', function() 
+        {
             clickCount++;
 
-            if (clickCount >= 4) {
+            if (clickCount >= 4) 
+            {
                 skipButton.style.display = 'block';
                 clickCount = 0;
             }
+            
+
+
+
+           
         });
 
         skipButton.addEventListener('click', function() {
