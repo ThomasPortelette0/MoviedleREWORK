@@ -206,3 +206,13 @@ canvas {
 {
     animation: youWon 1s infinite;
 }
+
+#credits
+{
+    color:rgb(189, 170, 170);
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+        
+}
