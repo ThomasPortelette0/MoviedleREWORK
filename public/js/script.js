@@ -204,7 +204,7 @@ function update_max_score()
     {
         maxScore = currScore;
         localStorage.setItem('cookie',maxScore);
-        const max_score = document.getElementById('maxscore');
+        const max_score = document.getElementById('maxscoreNB');
         max_score.innerHTML = maxScore;
     }
 }
