@@ -1,6 +1,28 @@
 let pixelation = 20; // Niveau initial de pixelisation.
 let imgObj = null; // Variable pour stocker l'objet Image.
 
+let currScore = 0;
+let maxScore = 0;
+
+function init_cookie()
+{
+    if(localStorage.getItem('cookie') == null)
+    {
+        maxScore = 0;
+        localStorage.setItem('cookie',maxScore);
+    }
+    else
+    {
+        maxScore = localStorage.getItem('cookie');
+    }
+    const max_score = document.getElementById('maxscoreNB');
+    max_score.innerHTML = maxScore;
+    const score = document.getElementById('scoreNB');
+    score.innerHTML = currScore;
+    
+
+}
+
 async function random_film_image(json_file)
 {
     try
@@ -107,6 +129,9 @@ function guess_mode(guess)
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
             canvas.classList.add('success');
+            currScore += 1;
+            update_score();
+            update_max_score();
 
             return true;
         }
@@ -124,6 +149,7 @@ function guess_mode(guess)
    return false;
 
 }
+
 
 
 
@@ -166,10 +192,26 @@ function autocomplete()
 
 }
 
+function update_score()
+{
+    const score = document.getElementById('scoreNB');
+    score.innerHTML = currScore;
+}
 
+function update_max_score()
+{
+    if(currScore > maxScore)
+    {
+        maxScore = currScore;
+        localStorage.setItem('cookie',maxScore);
+        const max_score = document.getElementById('maxscore');
+        max_score.innerHTML = maxScore;
+    }
+}
 
 document.addEventListener('DOMContentLoaded', async () => 
 {
+    init_cookie();
     var start = await random_film_image('films.json');
     const guess_button = document.getElementById('button');
     guess_button.addEventListener('click', async () => 
@@ -182,24 +224,25 @@ document.addEventListener('DOMContentLoaded', async () =>
                 const canvas = document.getElementById('photo');
                 canvas.classList.remove('success');
             }, 400);
+           
           
            
         }
     });
 
-const depixelate_button = document.getElementById('depixelate');
-depixelate_button.addEventListener('click', function() 
-{
-    if(pixelation > 1)
+    const depixelate_button = document.getElementById('depixelate');
+    depixelate_button.addEventListener('click', function() 
     {
-        pixelation -= 5;
-        const canvas = document.getElementById('photo');
-        const context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
-        pixelate();
-    }
-});
+        if(pixelation > 1)
+        {
+            pixelation -= 5;
+            const canvas = document.getElementById('photo');
+            const context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
+            pixelate();
+        }
+    });
 
     autocomplete();
 });

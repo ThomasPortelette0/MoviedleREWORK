@@ -216,3 +216,28 @@ canvas {
     margin-bottom: 5vh;
         
 }
+
+#scores
+{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    color:rgb(189, 170, 170);
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    
+}
+
+#scoreUp
+{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between
+}
+
+#scoreDown
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
