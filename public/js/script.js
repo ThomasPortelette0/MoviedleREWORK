@@ -167,7 +167,7 @@ function autocomplete()
             return;
         }
         
-        const matches = FILMS_ARRAY.filter(film => film.toLowerCase().startsWith(value.toLowerCase()));
+        const matches = FILMS_ARRAY.filter(film => film.toLowerCase().includes(value.toLowerCase()));
 
 
         if(matches.length===0)
@@ -223,10 +223,7 @@ document.addEventListener('DOMContentLoaded', async () =>
                 start = await random_film_image('films.json');
                 const canvas = document.getElementById('photo');
                 canvas.classList.remove('success');
-            }, 400);
-           
-          
-           
+            }, 400); 
         }
     });
 
