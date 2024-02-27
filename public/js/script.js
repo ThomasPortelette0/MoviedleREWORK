@@ -41,21 +41,10 @@ async function random_film_image(json_file)
             const canvas = document.getElementById('photo');
             const context = canvas.getContext('2d');
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 844c261 (canvas.width back)
             canvas.width = 350;
             canvas.height = 525;
 
             context.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
-<<<<<<< HEAD
-=======
-            context.drawImage(imgObj, 0, 0);
->>>>>>> ac9ad0a (fix conflict)
-=======
-
->>>>>>> 844c261 (canvas.width back)
             pixelate();
         };
 
